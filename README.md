@@ -1,2 +1,2 @@
 # Online_resume_builder
-it's online resume builder.
+it's an online resume builder.
