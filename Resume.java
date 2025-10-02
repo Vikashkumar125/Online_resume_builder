@@ -1,3 +1,4 @@
+//you must have jswing knowledge to get understand this code 
 import java.awt.Color;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -205,3 +206,4 @@ class Resume extends JFrame implements ActionListener {
         new Resume();
     }
 }
+
