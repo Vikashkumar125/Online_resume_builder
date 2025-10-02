@@ -1,210 +1,169 @@
-//you must have jswing knowledge to get understand this 
-import java.awt.Color;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+// You need iText 5 or 7 library in classpath for real PDF creation
+// Example: itextpdf-5.5.13.2.jar
+
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.FileOutputStream;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 class Resume extends JFrame implements ActionListener {
-    JTextField fatherfullname = null;
-    JTextField gender = null;
-    JTextField fatherfatherfullname = null;
-    JTextField cityy = null;
-    JTextField emaill = null;
-    JTextField skills = null;
-    JTextField college = null;
-    JTextField degree = null;
-    JTextField linkedln = null;
-    JTextField github = null;
-    JTextField hackerrnk = null;
-    JTextField contact = null;
-    JTextField experience = null;
-    JPasswordField password = null;
-    JPasswordField cpassword = null;
-    JFrame p = new JFrame("Created By Vikash Kumar- Online Resume Builder");
-    JComboBox cb;
+    private JTextField nameField, fatherNameField, cityField, emailField, skillsField,
+            collegeField, degreeField, linkedinField, githubField, hackerrankField,
+            contactField, experienceField;
+    private JPasswordField passwordField, confirmPasswordField;
+    private JComboBox<String> genderBox;
+    private JButton registerBtn, resetBtn;
 
     Resume() {
-        super("Resume");
-        this.p.getContentPane().setBackground(Color.lightGray);
-        String[] var1 = new String[]{"Male", "Female"};
-        this.cb = new JComboBox(var1);
-        this.cb.setBounds(200, 60, 200, 30);
-        this.p.add(this.cb);
-        this.fatherfullname = new JTextField(3);
-        this.fatherfatherfullname = new JTextField(3);
-        this.password = new JPasswordField(3);
-        this.cpassword = new JPasswordField(3);
-        this.cityy = new JTextField(3);
-        this.emaill = new JTextField(3);
-        this.skills = new JTextField(3);
-        this.college = new JTextField(3);
-        this.degree = new JTextField(3);
-        this.linkedln = new JTextField(3);
-        this.github = new JTextField(3);
-        this.hackerrnk = new JTextField(3);
-        this.contact = new JTextField(3);
-        this.experience = new JTextField(3);
-        this.fatherfullname.setBounds(200, 10, 200, 30);
-        this.fatherfatherfullname.setBounds(200, 110, 200, 30);
-        this.password.setBounds(200, 160, 200, 30);
-        this.cpassword.setBounds(200, 210, 200, 30);
-        this.cityy.setBounds(200, 260, 200, 30);
-        this.emaill.setBounds(200, 310, 200, 30);
-        this.skills.setBounds(200, 360, 200, 30);
-        this.college.setBounds(700, 10, 200, 30);
-        this.degree.setBounds(700, 60, 200, 30);
-        this.experience.setBounds(700, 110, 200, 30);
-        this.linkedln.setBounds(200, 510, 200, 30);
-        this.github.setBounds(200, 560, 200, 30);
-        this.hackerrnk.setBounds(200, 610, 200, 30);
-        this.contact.setBounds(200, 660, 200, 30);
-        this.p.add(this.fatherfullname);
-        this.p.add(this.fatherfatherfullname);
-        this.p.add(this.password);
-        this.p.add(this.cpassword);
-        this.p.add(this.cityy);
-        this.p.add(this.emaill);
-        this.p.add(this.skills);
-        this.p.add(this.college);
-        this.p.add(this.degree);
-        this.p.add(this.linkedln);
-        this.p.add(this.github);
-        this.p.add(this.hackerrnk);
-        this.p.add(this.contact);
-        this.p.add(this.experience);
-        JLabel var2 = new JLabel("NAME");
-        JLabel var3 = new JLabel("GENDER");
-        JLabel var4 = new JLabel("FATHERNAME");
-        JLabel var5 = new JLabel("PASSWORD");
-        JLabel var6 = new JLabel("CONFIRM PASSWORD");
-        JLabel var7 = new JLabel("CITY");
-        JLabel var8 = new JLabel("Email");
-        JLabel var9 = new JLabel("");
-        JLabel var10 = new JLabel("Skills");
-        JLabel var11 = new JLabel("College");
-        JLabel var12 = new JLabel("Degree");
-        JLabel var13 = new JLabel("Linkedin link");
-        JLabel var14 = new JLabel("Github link");
-        JLabel var15 = new JLabel("HackerRank link");
-        JLabel var16 = new JLabel("Contact");
-        JLabel var17 = new JLabel("Experience");
-        var2.setBounds(10, 10, 150, 30);
-        var3.setBounds(10, 60, 150, 30);
-        var4.setBounds(10, 110, 150, 30);
-        var5.setBounds(10, 160, 150, 30);
-        var6.setBounds(10, 210, 150, 30);
-        var7.setBounds(10, 260, 150, 30);
-        var8.setBounds(10, 310, 150, 30);
-        var9.setBounds(10, 310, 150, 30);
-        var10.setBounds(10, 360, 150, 30);
-        var13.setBounds(10, 510, 150, 30);
-        var14.setBounds(10, 560, 150, 30);
-        var15.setBounds(10, 610, 150, 30);
-        var16.setBounds(10, 660, 150, 30);
-        var17.setBounds(500, 110, 150, 30);
-        var11.setBounds(500, 10, 150, 30);
-        var12.setBounds(500, 60, 150, 30);
-        this.p.add(var2);
-        this.p.add(var3);
-        this.p.add(var4);
-        this.p.add(var5);
-        this.p.add(var6);
-        this.p.add(var7);
-        this.p.add(var8);
-        this.p.add(var9);
-        this.p.add(var10);
-        this.p.add(var11);
-        this.p.add(var12);
-        this.p.add(var15);
-        this.p.add(var13);
-        this.p.add(var14);
-        this.p.add(var11);
-        this.p.add(var16);
-        this.p.add(var17);
-        JButton var18 = new JButton("REGISTER");
-        JButton var19 = new JButton("RESET");
-        var18.setBounds(500, 400, 100, 30);
-        var19.setBounds(700, 400, 100, 30);
-        this.p.add(var18);
-        this.p.add(var19);
-        var18.addActionListener(this);
-        var19.addActionListener(this);
-        this.p.setLayout((LayoutManager)null);
-        this.p.setVisible(true);
-        this.p.setSize(1000, 1000);
+        super("Online Resume Builder - Created By Vikash Kumar");
+        setSize(1000, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+        getContentPane().setBackground(Color.LIGHT_GRAY);
+
+        String[] genders = {"Male", "Female"};
+        genderBox = new JComboBox<>(genders);
+
+        nameField = new JTextField();
+        fatherNameField = new JTextField();
+        passwordField = new JPasswordField();
+        confirmPasswordField = new JPasswordField();
+        cityField = new JTextField();
+        emailField = new JTextField();
+        skillsField = new JTextField();
+        collegeField = new JTextField();
+        degreeField = new JTextField();
+        experienceField = new JTextField();
+        linkedinField = new JTextField();
+        githubField = new JTextField();
+        hackerrankField = new JTextField();
+        contactField = new JTextField();
+
+        // Labels + Components
+        addLabel("NAME", 10, 10); addField(nameField, 200, 10);
+        addLabel("GENDER", 10, 60); genderBox.setBounds(200, 60, 200, 30); add(genderBox);
+        addLabel("FATHER NAME", 10, 110); addField(fatherNameField, 200, 110);
+        addLabel("PASSWORD", 10, 160); addField(passwordField, 200, 160);
+        addLabel("CONFIRM PASSWORD", 10, 210); addField(confirmPasswordField, 200, 210);
+        addLabel("CITY", 10, 260); addField(cityField, 200, 260);
+        addLabel("EMAIL", 10, 310); addField(emailField, 200, 310);
+        addLabel("SKILLS", 10, 360); addField(skillsField, 200, 360);
+        addLabel("COLLEGE", 500, 10); addField(collegeField, 700, 10);
+        addLabel("DEGREE", 500, 60); addField(degreeField, 700, 60);
+        addLabel("EXPERIENCE", 500, 110); addField(experienceField, 700, 110);
+        addLabel("LINKEDIN", 10, 510); addField(linkedinField, 200, 510);
+        addLabel("GITHUB", 10, 560); addField(githubField, 200, 560);
+        addLabel("HACKERRANK", 10, 610); addField(hackerrankField, 200, 610);
+        addLabel("CONTACT", 10, 660); addField(contactField, 200, 660);
+
+        registerBtn = new JButton("REGISTER");
+        resetBtn = new JButton("RESET");
+        registerBtn.setBounds(500, 400, 120, 30);
+        resetBtn.setBounds(700, 400, 120, 30);
+        add(registerBtn); add(resetBtn);
+
+        registerBtn.addActionListener(this);
+        resetBtn.addActionListener(this);
+
+        setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent var1) {
-        String var2 = var1.getActionCommand();
-        String var3 = this.password.getText();
-        String var4 = this.cpassword.getText();
-        String var5 = this.fatherfullname.getText();
-        String var6 = this.fatherfatherfullname.getText();
-        String var7 = this.cityy.getText();
-        String var8 = this.emaill.getText();
-        String var9 = (String)this.cb.getSelectedItem();
-        String var10 = this.skills.getText();
-        String var11 = this.college.getText();
-        String var12 = this.degree.getText();
-        String var13 = this.linkedln.getText();
-        String var14 = this.github.getText();
-        String var15 = this.contact.getText();
-        String var16 = this.experience.getText();
-        if (var2.equals("REGISTER")) {
-            JFrame var17;
-            if (!var5.equals("") && !var6.equals("") && !var7.equals("") && !var8.equals("") && !var9.equals("") && !var3.equals("") && !var4.equals("") && !var11.equals("") && !var12.equals("") && !var15.equals("") && !var13.equals("") && !var14.equals("") && !var16.equals("")) {
-                if (var3.equals(var4)) {
-                    var17 = new JFrame();
-                    JOptionPane.showMessageDialog(var17, "Data Registered Successfully");
+    private void addLabel(String text, int x, int y) {
+        JLabel label = new JLabel(text);
+        label.setBounds(x, y, 150, 30);
+        add(label);
+    }
 
-                    try {
-                        FileOutputStream var18 = new FileOutputStream(var5 + "_Resume.pdf", true);
-                        String var19 = "Name: " + var5 + "\nGender: " + var9 + "\nFather name: " + var6 + "\nPassword: " + var3 + "\nCity: " + var7 + "\nEmail: " + var8 + "\nSkills: " + var10 + "\nCollege: " + var11 + "\nDegree: " + var12 + "\nLinkedin: " + var13 + "\nGithub: " + var14 + "\nContact: " + var15 + "\nExperience: " + var16;
-                        char[] var20 = var19.toCharArray();
+    private void addField(JComponent comp, int x, int y) {
+        comp.setBounds(x, y, 200, 30);
+        add(comp);
+    }
 
-                        for(int var21 = 0; var21 < var19.length(); ++var21) {
-                            var18.write(var20[var21]);
-                        }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String cmd = e.getActionCommand();
 
-                        var18.close();
-                    } catch (Exception var22) {
-                    }
-                } else {
-                    var17 = new JFrame();
-                    JOptionPane.showMessageDialog(var17, "Password did not match");
-                }
-            } else {
-                var17 = new JFrame();
-                JOptionPane.showMessageDialog(var17, "Enter all details");
+        if (cmd.equals("REGISTER")) {
+            String name = nameField.getText().trim();
+            String fatherName = fatherNameField.getText().trim();
+            String city = cityField.getText().trim();
+            String email = emailField.getText().trim();
+            String skills = skillsField.getText().trim();
+            String college = collegeField.getText().trim();
+            String degree = degreeField.getText().trim();
+            String linkedin = linkedinField.getText().trim();
+            String github = githubField.getText().trim();
+            String hackerrank = hackerrankField.getText().trim();
+            String contact = contactField.getText().trim();
+            String experience = experienceField.getText().trim();
+            String gender = (String) genderBox.getSelectedItem();
+
+            String password = new String(passwordField.getPassword());
+            String confirmPassword = new String(confirmPasswordField.getPassword());
+
+            if (name.isEmpty() || fatherName.isEmpty() || city.isEmpty() || email.isEmpty() ||
+                skills.isEmpty() || college.isEmpty() || degree.isEmpty() || linkedin.isEmpty() ||
+                github.isEmpty() || contact.isEmpty() || experience.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill all fields");
+                return;
             }
-        } else if (var2.equals("RESET")) {
-            this.fatherfullname.setText("");
-            this.fatherfatherfullname.setText("");
-            this.password.setText("");
-            this.cpassword.setText("");
-            this.emaill.setText("");
-            this.cityy.setText("");
-            this.skills.setText("");
-            this.linkedln.setText("");
-            this.experience.setText("");
-            this.degree.setText("");
-            this.github.setText("");
-            this.contact.setText("");
-        }
 
+            if (!password.equals(confirmPassword)) {
+                JOptionPane.showMessageDialog(this, "Passwords do not match");
+                return;
+            }
+
+            // ✅ Create PDF using iText
+            try {
+                Document doc = new Document();
+                PdfWriter.getInstance(doc, new FileOutputStream(name + "_Resume.pdf"));
+                doc.open();
+
+                doc.add(new Paragraph("Resume", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.BLUE)));
+                doc.add(new Paragraph("\nName: " + name));
+                doc.add(new Paragraph("Gender: " + gender));
+                doc.add(new Paragraph("Father's Name: " + fatherName));
+                doc.add(new Paragraph("City: " + city));
+                doc.add(new Paragraph("Email: " + email));
+                doc.add(new Paragraph("Skills: " + skills));
+                doc.add(new Paragraph("College: " + college));
+                doc.add(new Paragraph("Degree: " + degree));
+                doc.add(new Paragraph("Experience: " + experience));
+                doc.add(new Paragraph("LinkedIn: " + linkedin));
+                doc.add(new Paragraph("GitHub: " + github));
+                doc.add(new Paragraph("HackerRank: " + hackerrank));
+                doc.add(new Paragraph("Contact: " + contact));
+
+                doc.close();
+                JOptionPane.showMessageDialog(this, "Resume created successfully: " + name + "_Resume.pdf");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error while creating PDF: " + ex.getMessage());
+            }
+        } else if (cmd.equals("RESET")) {
+            clearFields();
+        }
     }
 
-    public static void main(String[] var0) {
-        new Resume();
+    private void clearFields() {
+        nameField.setText("");
+        fatherNameField.setText("");
+        passwordField.setText("");
+        confirmPasswordField.setText("");
+        cityField.setText("");
+        emailField.setText("");
+        skillsField.setText("");
+        collegeField.setText("");
+        degreeField.setText("");
+        linkedinField.setText("");
+        githubField.setText("");
+        hackerrankField.setText("");
+        contactField.setText("");
+        experienceField.setText("");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(Resume::new);
     }
 }
-
-
